@@ -4,16 +4,13 @@
 	box-sizing: border-box;
 }
 
-#root {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+body {
 	height: 100vh;
-	background-image: linear-gradient(
-		95.2deg,
-		rgba(173, 252, 234, 1) 26.8%,
-		rgba(192, 229, 246, 1) 64%
-	);
+	background-image: linear-gradient(to right, #b6fbff, #83a4d4);
+}
+
+main {
+	height: 100%;
 }
 
 .brand-logo {
@@ -30,26 +27,17 @@
 }
 
 .temp-box {
-  background-color: rgba(0,0,0,0.1);
-  width: 700px;
-  height: 400px;
+	background-color: rgba(255, 255, 255, 0.2);
+	
+	width: 1000px;
 }
 
 .informations {
-  height: 40px;
+	height: 60px;
 }
 
 .info-box {
-  height: 180px;
-}
-
-footer {
-	bottom: 0;
-	width: 100vw;
-	height: 30px;
-	display: flex;
-	align-items: baseline;
-	justify-content: center;
+	height: 270px;
 }
 
 .author {

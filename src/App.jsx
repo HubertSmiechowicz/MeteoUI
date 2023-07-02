@@ -52,11 +52,13 @@ function App() {
 					</Navbar.Collapse>
 				</Navbar>
 			</header>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/presentDay' element={<PresentDayForecast />} />
-			</Routes>
-			<footer className='bg-dark'>
+			<main className='d-flex align-items-center justify-content-center'>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/presentDay' element={<PresentDayForecast />} />
+				</Routes>
+			</main>
+			<footer className='bg-dark text-center text-white fixed-bottom'>
 				<p className='author'>Hubert Śmiechowicz 2023</p>
 			</footer>
 		</>
