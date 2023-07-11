@@ -5,12 +5,11 @@
 }
 
 body {
-	height: 100vh;
 	background-image: linear-gradient(to right, #b6fbff, #83a4d4);
 }
 
-main {
-	height: 100%;
+#root {
+	height: 100vh;
 }
 
 .brand-logo {
@@ -28,8 +27,12 @@ main {
 
 .temp-box {
 	background-color: rgba(255, 255, 255, 0.2);
-	
+
 	width: 1000px;
+}
+
+.custom-select {
+	background-color: rgba(255, 255, 255, 0.2);
 }
 
 .informations {
@@ -42,4 +45,22 @@ main {
 
 .author {
 	color: white;
+}
+
+.ikon-weather {
+	height: 150px;
+	width: 150px;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.img-slider {
+	width: 50px;
+	height: 50px;
+}
+
+.weather-slider {
+	background-image: linear-gradient(to right, #b6fbff, #83a4d4);
 }

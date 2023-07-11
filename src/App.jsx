@@ -52,7 +52,7 @@ function App() {
 					</Navbar.Collapse>
 				</Navbar>
 			</header>
-			<main className='d-flex align-items-center justify-content-center'>
+			<main className='d-flex align-items-center justify-content-center min-vh-100'>
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/presentDay' element={<PresentDayForecast />} />
