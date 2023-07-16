@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, NavItem, Navbar } from 'react-bootstrap';
 import {
 	BrowserRouter as Router,
 	Route,
@@ -11,12 +11,15 @@ import {
 import './App.css';
 import PresentDayForecast from './components/PresentDayForecast';
 import Home from './components/Home';
+import FiveDaysForecast from './components/FiveDaysForecast';
+import AirPollution from './components/AirPollution';
+import Maps from './components/Maps';
 
 function App() {
 	return (
 		<>
 			<header>
-				<Navbar className='navbar-dark bg-dark' expand='sm'>
+				<Navbar className='navbar-dark bg-dark' expand='lg'>
 					<Navbar.Brand className='navbar-brand' href='/'>
 						<img
 							src='./src/assets/meteobrand.png'
@@ -35,7 +38,8 @@ function App() {
 						data-bs-target='#mainmenu'
 						aria-controls='mainmenu'
 						aria-expanded='false'
-						aria-label='Przełącznik nawigacji'>
+						aria-label='Przełącznik nawigacji'
+					>
 						<span className='navbar-toggler-icon'></span>
 					</Navbar.Toggle>
 					<Navbar.Collapse id='mainmenu'>
@@ -44,10 +48,38 @@ function App() {
 								<NavLink
 									to='/presentDay'
 									className='nav-link'
-									activeclassname='active'>
+									activeclassname='active'
+								>
 									Dziś
 								</NavLink>
 							</Nav.Item>
+							<NavItem>
+								<NavLink
+									to='/fiveDays'
+									className='nav-link'
+									activeclassname='active'
+								>
+									Pięć dni
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink
+									to='/airPollution'
+									className='nav-link'
+									activeclassname='active'
+								>
+									Jakość powietrza
+								</NavLink>
+							</NavItem>
+							<NavItem>
+								<NavLink
+									to='/maps'
+									className='nav-link'
+									activeclassname='active'
+								>
+									Mapy
+								</NavLink>
+							</NavItem>
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
@@ -56,6 +88,9 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/presentDay' element={<PresentDayForecast />} />
+					<Route path='/fiveDays' element={<FiveDaysForecast />} />
+					<Route path='/airPollution' element={<AirPollution />} />
+					<Route path='/maps' element={<Maps />} />
 				</Routes>
 			</main>
 			<footer className='bg-dark text-center text-white fixed-bottom'>

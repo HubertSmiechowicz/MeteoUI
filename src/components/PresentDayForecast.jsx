@@ -128,6 +128,7 @@ function PresentDayForecast() {
 					>
 						{simpleForecastist.map((simpleForecastist, index) => (
 							<Carousel.Item
+								className='slider-item'
 								key={index}
 								onClick={() => {
 									axios
@@ -162,11 +163,11 @@ function PresentDayForecast() {
 						/>
 					</div>
 					<div className='col-md-3 info-box d-flex align-items-center justify-content-center flex-column'>
-						<p className='text-center2fs-5'>temp. odczuwalna</p>
+						<p className='text-center2fs-5'>Temp. odczuwalna</p>
 						<p className='fs-2'>{feelsTemperature}°C</p>
 					</div>
 					<div className='col-md-3 info-box d-flex align-items-center justify-content-center flex-column'>
-						<p className='fs-5'>ciśnienie</p>
+						<p className='fs-5'>Ciśnienie</p>
 						<p className='fs-2'>{pressure} hPa</p>
 					</div>
 					<div className='col-md-6 info-box d-flex align-items-center justify-content-center'>
@@ -176,11 +177,11 @@ function PresentDayForecast() {
 						</p>
 					</div>
 					<div className='col-md-3 info-box d-flex align-items-center justify-content-center flex-column '>
-						<p className='fs-5'>wilgotność</p>
+						<p className='fs-5'>Wilgotność</p>
 						<p className='fs-2'>{humidity} %</p>
 					</div>
 					<div className='col-md-3 info-box d-flex align-items-center justify-content-center flex-column'>
-						<p className='fs-5'>prędkość wiatru</p>
+						<p className='fs-5'>Prędkość wiatru</p>
 						<p className='fs-2'>{windSpeed} m/s</p>
 					</div>
 				</div>
