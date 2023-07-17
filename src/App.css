@@ -65,6 +65,10 @@ body {
 	background-image: linear-gradient(to right, #b6fbff, #83a4d4);
 }
 
-.slider-item{
+.slider-item {
 	cursor: pointer;
+}
+
+.cityFrom {
+	width: 300px;
 }
