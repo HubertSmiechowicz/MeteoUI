@@ -1,16 +1,25 @@
-import React, { Component, useEffect, useRef, useState } from 'react';
-import { Button, Carousel, Dropdown, Form, FormControl } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Carousel } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
+import { InputContext } from './BasePage';
 
 function PresentDayForecast() {
 	const baseURI = 'https://localhost:7257/';
-	const selectRef = useRef(null);
-	const dropdownItemRef = useRef(null);
-	const simpleForecastRef = useRef(null);
+	const {
+		selectRef,
+		setWeather,
+		name,
+		temperature,
+		image,
+		feelsTemperature,
+		tempMax,
+		pressure,
+		description,
+		humidity,
+		windSpeed,
+	} = useContext(InputContext);
 	const currentDay = new Date();
-
-	const [options, setCities] = useState([]);
 	const [items, setItems] = useState(['Warszawa']);
 	const [simpleForecast, setSimpleForecast] = useState({
 		name: '',
@@ -18,30 +27,7 @@ function PresentDayForecast() {
 		image: '',
 	});
 	const [simpleForecastist, setSimpleForecastist] = useState([]);
-	const [name, setName] = useState();
-	const [temperature, setTemperature] = useState();
-	const [image, setImage] = useState();
-	const [feelsTemperature, setFeelsTemperature] = useState();
-	const [tempMax, setTempMax] = useState();
-	const [pressure, setPressure] = useState();
-	const [description, setDescription] = useState();
-	const [humidity, setHumidity] = useState();
-	const [windSpeed, setWindSpeed] = useState();
 	const [isInitialDataFetched, setIsInitialDataFetched] = useState(false);
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const [isAbleToConnectApi, setisAbleToConnectApi] = useState(false);
-
-	const setWeather = (response) => {
-		setName(response.data.name);
-		setTemperature(response.data.temp);
-		setFeelsTemperature(response.data.feelsLike);
-		setTempMax(response.data.tempMax);
-		setPressure(response.data.pressure);
-		setDescription(response.data.description);
-		setHumidity(response.data.humidity);
-		setWindSpeed(response.data.windSpeed);
-		setImage(response.data.image);
-	};
 
 	useEffect(() => {
 		axios.get(baseURI + 'Cities/main').then((response) => {
@@ -72,7 +58,6 @@ function PresentDayForecast() {
 						};
 						setSimpleForecast(newForecast);
 						forecastList.push(newForecast);
-						console.log(forecastList);
 					});
 				});
 		}
@@ -88,76 +73,17 @@ function PresentDayForecast() {
 				});
 		} else {
 			axios
-				.get(baseURI + 'PresentDayForecast?cityName=' + selectRef.current.value)
+				.get(baseURI + 'PresentDayForecast?cityName=' + selectRef)
 				.then((response) => {
 					setWeather(response);
 				});
 		}
 	}, []);
 
-	function getCitiesNames() {
-		setisAbleToConnectApi(false);
-		if (selectRef.current.value && selectRef.current.value.length >= 3) {
-			setIsDropdownOpen(true);
-			axios
-				.get(baseURI + 'Cities?cityNameFragment=' + selectRef.current.value)
-				.then((response) => {
-					setCities(response.data);
-				});
-		}
-	}
-
-	function getForecast() {
-		if (isAbleToConnectApi) {
-			axios
-				.get(baseURI + 'PresentDayForecast?cityName=' + selectRef.current.value)
-				.then((response) => {
-					setWeather(response);
-				});
-		}
-	}
-
-	function setSelectRef(value) {
-		selectRef.current.value = value;
-		setIsDropdownOpen(false);
-		setisAbleToConnectApi(true);
-	}
-
 	return (
 		<>
-			<div className='container rounded-5 temp-box'>
+			<div className='container'>
 				<div className='row'>
-					<div className='col-12 my-4 search-city'>
-						<Form className='cityFrom d-flex' onChange={getCitiesNames}>
-							<div>
-								<FormControl
-									type='text'
-									placeholder='Wpisz nazwę miasta...'
-									ref={selectRef}
-								/>
-								<Dropdown
-									show={
-										isDropdownOpen &&
-										options.length > 0 &&
-										selectRef.current.value !== ''
-									}>
-									<Dropdown.Menu>
-										{options.map((options, index) => (
-											<Dropdown.Item
-												key={index}
-												ref={dropdownItemRef}
-												onClick={() => setSelectRef(options)}>
-												{options}
-											</Dropdown.Item>
-										))}
-									</Dropdown.Menu>
-								</Dropdown>
-							</div>
-							<Button className='ms-3' variant='light' onClick={getForecast}>
-								Wyślij
-							</Button>
-						</Form>
-					</div>
 					<div className='col-md-4 informations fs-5'>
 						{name} - {currentDay.getDay()}.{currentDay.getMonth() + 1}.
 						{currentDay.getFullYear()} {currentDay.getHours()}:
