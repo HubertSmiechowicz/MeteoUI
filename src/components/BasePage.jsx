@@ -25,6 +25,11 @@ function BasePage() {
 	const [humidity, setHumidity] = useState();
 	const [windSpeed, setWindSpeed] = useState();
 
+	const [temperatures, setTemperatures] = useState([]);
+	const [days, setDays] = useState([]);
+	const [cityName, setCityName] = useState();
+	const [fiveDayImage, setFiveDayImage] = useState();
+
 	function setSelectRef(value) {
 		selectRef.current.value = value;
 		setIsDropdownOpen(false);
@@ -55,7 +60,22 @@ function BasePage() {
 			axios
 				.get(baseURI + 'FiveDaysForecast?cityName=' + selectRef.current.value)
 				.then((response) => {
-					console.log(response);
+					const daysFromData = [''];
+					const temperatureFromData = [null];
+					const imagesFromData = [''];
+					response.data.forecastDtos.forEach((element) => {
+						daysFromData.push(element.dt);
+						const temperature = parseFloat(element.temp);
+						temperatureFromData.push(temperature);
+						imagesFromData.push(element.image);
+					});
+					daysFromData.push('');
+					temperatureFromData.push(null);
+					imagesFromData.push('');
+					setDays(daysFromData);
+					setTemperatures(temperatureFromData);
+					setCityName(response.data.name);
+					setFiveDayImage(imagesFromData);
 					selectRef.current.value = '';
 				});
 		}
@@ -77,7 +97,7 @@ function BasePage() {
 		<>
 			<div className='temp-box rounded-5'>
 				<div className='col-12 my-4 search-city'>
-					<Form className='cityFrom d-flex' onChange={getCitiesNames}>
+					<Form className='cityFrom d-flex ms-3' onChange={getCitiesNames}>
 						<div>
 							<FormControl
 								type='text'
@@ -120,6 +140,14 @@ function BasePage() {
 						description,
 						humidity,
 						windSpeed,
+						setTemperatures,
+						setDays,
+						temperatures,
+						days,
+						cityName,
+						setCityName,
+						fiveDayImage,
+						setFiveDayImage,
 					}}>
 					<PagesRouter />
 				</InputContext.Provider>

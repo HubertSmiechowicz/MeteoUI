@@ -85,7 +85,7 @@ function PresentDayForecast() {
 			<div className='container'>
 				<div className='row'>
 					<div className='col-md-4 informations fs-5'>
-						{name} - {currentDay.getDay()}.{currentDay.getMonth() + 1}.
+						{name} - {currentDay.getDate()}.{currentDay.getMonth() + 1}.
 						{currentDay.getFullYear()} {currentDay.getHours()}:
 						{currentDay.getMinutes()}
 					</div>
